@@ -1,0 +1,24 @@
+.container_static {
+  .products_title {
+    text-align: center;
+    position: relative;
+    margin: 40px 0px;
+
+    h1 {
+      color: grey;
+      padding-bottom: 5px;
+    }
+  }
+
+  .products_title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 10%;
+    transform: translateX(-50%);
+    height: 6px;
+    border-radius: 3px;
+    background: grey;
+  }
+}
