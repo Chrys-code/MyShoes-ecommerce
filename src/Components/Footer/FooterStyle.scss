@@ -1,0 +1,84 @@
+.footer_card {
+  width: 100%;
+  height: 56px;
+  background: white;
+  border-radius: 15px 15px 0px 0px;
+  padding: 10px 0px;
+
+  .footer_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .footer_left {
+      padding: 5px;
+      p:hover {
+        text-decoration: underline;
+        color: rgb(255, 50, 130);
+        cursor: pointer;
+      }
+    }
+
+    .footer_middle {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      padding: 5px;
+
+      .icons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+
+        .icon {
+          margin: 10px;
+          cursor: pointer;
+        }
+
+        .icon:hover {
+          .MuiSvgIcon-root {
+            color: rgb(255, 50, 130);
+          }
+        }
+      }
+
+      h3:hover {
+        cursor: pointer;
+        color: rgb(255, 50, 130);
+      }
+    }
+
+    .footer_right {
+      padding: 5px;
+
+      .contact,
+      .location,
+      .email {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        p {
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .footer_card {
+    .footer_container {
+      .footer_middle {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+      }
+    }
+  }
+}
