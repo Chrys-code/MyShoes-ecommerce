@@ -9,14 +9,19 @@ export class Slider extends Component {
     this.state = {
       activeIndex: 0,
       images: [
-        require("../../../Assets/Images/road-3.jpg"),
-
-        require("../../../Assets/Images/road-1.jpg"),
-
-        require("../../../Assets/Images/road-2.jpg"),
-
-        require("../../../Assets/Images/road-3.jpg"),
-        require("../../../Assets/Images/road-1.jpg"),
+        { src: require("../../../Assets/Images/road-1.jpg"), id: 1 },
+        {
+          src: require("../../../Assets/Images/road-2.jpg"),
+          id: 2,
+        },
+        {
+          src: require("../../../Assets/Images/road-3.jpg"),
+          id: 3,
+        },
+        {
+          src: require("../../../Assets/Images/road-1.jpg"),
+          id: 4,
+        },
       ],
       //images: imageList,
     };

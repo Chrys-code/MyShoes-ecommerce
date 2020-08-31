@@ -8,6 +8,9 @@ export class SlideCont extends Component {
     this.state = {
       activeIndex: this.props.activeIndex,
       images: this.props.images,
+      style: {
+        transition: "2s ease-in-out",
+      },
     };
   }
 
@@ -17,6 +20,24 @@ export class SlideCont extends Component {
     setInterval(() => {
       this.autoplay();
     }, 6000);
+
+    window.addEventListener("transitionend", () => {
+      let index = this.state.activeIndex;
+      let images = this.state.images;
+
+      if (images[index].id === 4) {
+        this.setState({ activeIndex: 0, style: { transition: "none" } });
+        setTimeout(() => {
+          this.setState({ style: { transition: "2s ease-in-out" } });
+        }, 10);
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    clearInterval();
+    clearTimeout();
+    window.removeEventListener("transitionend");
   }
 
   autoplay() {
@@ -29,12 +50,11 @@ export class SlideCont extends Component {
       index++;
       this.setState({ activeIndex: index });
     }
-    console.log(index);
   }
 
   render() {
     const style = {
-      transition: "2s ease-in-out",
+      transition: this.state.style.transition,
       transform: `translateX(${-100 * this.state.activeIndex}%)`,
     };
 

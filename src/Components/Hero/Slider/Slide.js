@@ -13,7 +13,7 @@ export class Slide extends Component {
     return (
       <div style={this.props.style} className="slide">
         {this.state.images.map((image, index) => {
-          return <img key={index} src={image} />;
+          return <img key={index} src={image.src} />;
         })}
       </div>
     );
