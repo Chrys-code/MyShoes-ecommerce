@@ -28,7 +28,9 @@ export class Product extends Component {
           </div>
           <div className="product_bottom">
             <p>Available</p>
-            <button>Add to basket!</button>
+            <button>
+              <p>Add to basket!</p>
+            </button>
           </div>
         </div>
       </div>

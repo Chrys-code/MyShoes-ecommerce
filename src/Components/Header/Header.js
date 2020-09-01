@@ -11,7 +11,8 @@ export class Header extends Component {
     this.state = {
       menuIconDisplayStyle: { display: "block" },
       menuOpenIconDisplayStyle: { display: "none" },
-      headerHeightStyle: { transition: "1s ease-in-out" },
+      headerHeightStyle: {},
+      isOpen: false,
     };
   }
 
@@ -21,7 +22,7 @@ export class Header extends Component {
     this.setState({
       menuIconDisplayStyle: { display: "none" },
       menuOpenIconDisplayStyle: { display: "block" },
-      headerHeightStyle: { ...this.state.headerHeightStyle, height: "300px" },
+      isOpen: true,
     });
   }
 
@@ -31,18 +32,19 @@ export class Header extends Component {
     this.setState({
       menuIconDisplayStyle: { display: "block" },
       menuOpenIconDisplayStyle: { display: "none" },
-      headerHeightStyle: { ...this.state.headerHeightStyle, height: "" },
+      isOpen: false,
     });
   }
 
   render() {
     const menuShow = this.state.menuIconDisplayStyle;
     const menuOpenShow = this.state.menuOpenIconDisplayStyle;
-    const headerShow = this.state.headerHeightStyle;
 
     return (
       <>
-        <div style={headerShow} className="header">
+        <div
+          className={"header" + (this.state.isOpen ? " header--active" : "")}
+        >
           <div className="header_wrapper">
             <div className="header_left">
               <h2>MyShoes</h2>

@@ -5,6 +5,11 @@
   box-shadow: 0px 5px 8px -5px rgba(0, 0, 0, 0.75);
   margin: 10px;
 
+  p {
+    color: grey;
+    font-weight: 600;
+  }
+
   .product_top {
     display: flex;
     flex-direction: column;
@@ -50,7 +55,28 @@
     border-top: 1px solid grey;
 
     button {
+      cursor: pointer;
       margin: 15px 0px;
+      padding: 5px;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid gray;
+      border-radius: 7px;
+      background: lightgreen;
+      box-shadow: 0px 5px 8px -5px rgba(0, 0, 0, 0.75);
+      outline: none;
+
+      p {
+        font-weight: 800;
+        color: grey;
+      }
+    }
+
+    button:focus {
+      margin: 15px 0px;
+      padding: 5px;
+      box-shadow: none;
     }
   }
 }

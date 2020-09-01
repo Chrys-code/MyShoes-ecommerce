@@ -74,6 +74,11 @@
   }
 }
 
+.header--active {
+  height: 300px;
+  transition: 0.4s ease-in-out;
+}
+
 @media screen and (max-width: 576px) {
   .header {
     .header_wrapper {
@@ -96,8 +101,6 @@
         display: block;
         padding: 0px 20px;
         flex: 0.3;
-        .menuOpen {
-        }
       }
     }
   }

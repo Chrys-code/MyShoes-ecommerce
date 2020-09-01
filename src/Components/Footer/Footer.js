@@ -12,7 +12,7 @@ function Footer() {
     <footer className="footer_card">
       <div className="footer_container container_static">
         <div className="row">
-          <div className="footer_left col-xlg-4 col-xlg-4 col-lg-12 col-md-12 col-sm-12 col-xsm-12">
+          <div className="footer_left col-xxlg-4 col-xlg-4 col-xlg-4 col-lg-12 col-md-12 col-sm-12 col-xsm-12">
             <h4>LET US HELP YOU</h4>
             <p>Delivery & collection</p>
             <p>Returns & refunds</p>
@@ -20,7 +20,7 @@ function Footer() {
             <p>Environmental Policy</p>
           </div>
 
-          <div className="footer_middle col-xlg-4 col-xlg-4 col-lg-12 col-md-12 col-sm-12 col-xsm-12">
+          <div className="footer_middle col-xxlg-4 col-xlg-4 col-xlg-4 col-lg-12 col-md-12 col-sm-12 col-xsm-12">
             <div className="icons">
               <div className="icon">
                 <InstagramIcon />
@@ -32,12 +32,16 @@ function Footer() {
                 <TwitterIcon />
               </div>
             </div>
-            <a target="_blank" href="https://chrys-code.github.io/portfolio/#/">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://chrys-code.github.io/portfolio/#/"
+            >
               <h3>2020@ Krisztian Nagy</h3>
             </a>
           </div>
 
-          <div className="footer_right  col-xlg-4 col-xlg-4 col-lg-12 col-md-12 col-sm-12 col-xsm-12">
+          <div className="footer_right col-xxlg-4 col-xlg-4 col-xlg-4 col-lg-12 col-md-12 col-sm-12 col-xsm-12">
             <div className="contact">
               <PhoneIcon />
               <p>(+44) 77 00000 000</p>
