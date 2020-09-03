@@ -36,6 +36,7 @@
         .icon {
           margin: 10px;
           cursor: pointer;
+          color: grey;
         }
 
         .icon:hover {
@@ -43,6 +44,10 @@
             color: rgb(255, 50, 130);
           }
         }
+      }
+
+      h3 {
+        color: grey;
       }
 
       h3:hover {
@@ -64,6 +69,7 @@
 
         p {
           margin-left: 10px;
+          color: grey;
         }
       }
     }

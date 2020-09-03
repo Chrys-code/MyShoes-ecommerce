@@ -1,0 +1,19 @@
+.filter {
+  display: flex;
+  padding: 1rem;
+  margin: 1rem;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .filter-result,
+  .filter-sort,
+  .filter-size {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    p {
+      margin-right: 10px;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./ProductStyle.scss";
+import { setInStorage } from "../../../utils/Storage";
 
 export class Product extends Component {
   constructor(props) {
@@ -7,6 +8,8 @@ export class Product extends Component {
 
     this.state = {};
   }
+
+  onClickHandle(e) {}
 
   render() {
     return (
@@ -28,7 +31,7 @@ export class Product extends Component {
           </div>
           <div className="product_bottom">
             <p>Available</p>
-            <button>
+            <button onClick={(e) => this.onClickHandle(e)}>
               <p>Add to basket!</p>
             </button>
           </div>
