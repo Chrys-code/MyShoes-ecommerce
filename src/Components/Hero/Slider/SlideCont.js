@@ -9,7 +9,7 @@ export class SlideCont extends Component {
       activeIndex: this.props.activeIndex,
       images: this.props.images,
       style: {
-        transition: "2s ease-in-out",
+        transition: "1.2s ease-in-out",
       },
     };
   }
@@ -21,24 +21,26 @@ export class SlideCont extends Component {
       this.autoplay();
     }, 6000);
 
-    window.addEventListener("transitionend", () => {
-      let index = this.state.activeIndex;
-      let images = this.state.images;
-
-      if (images[index].id === 4) {
-        this.setState({ activeIndex: 0, style: { transition: "none" } });
-        setTimeout(() => {
-          this.setState({ style: { transition: "2s ease-in-out" } });
-        }, 10);
-      }
-    });
+    window.addEventListener("transitionend", this.transitionListener);
   }
 
   componentWillUnmount() {
     clearInterval();
     clearTimeout();
-    window.removeEventListener("transitionend");
+    window.removeEventListener("transitionend", this.transitionListener);
   }
+
+  transitionListener = () => {
+    let index = this.state.activeIndex;
+    let images = this.state.images;
+
+    if (images[index].id === 4) {
+      this.setState({ activeIndex: 0, style: { transition: "none" } });
+      setTimeout(() => {
+        this.setState({ style: { transition: "2s ease-in-out" } });
+      }, 10);
+    }
+  };
 
   autoplay() {
     let index = this.state.activeIndex;

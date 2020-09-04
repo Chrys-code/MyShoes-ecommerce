@@ -8,6 +8,7 @@
   padding: 15px 20px;
   z-index: 10;
   overflow: hidden;
+  transition: 0.4s ease-in-out;
 
   .header_wrapper {
     position: relative;
@@ -46,6 +47,10 @@
           cursor: pointer;
         }
 
+        .header-link--active {
+          color: rgb(255, 50, 130);
+        }
+
         .header-link:nth-of-type(5) {
           transform: translateY(+10%);
         }
@@ -55,7 +60,9 @@
         }
 
         .header-link--active {
-          color: rgb(255, 50, 130);
+          .MuiSvgIcon-root {
+            color: rgb(255, 50, 130);
+          }
         }
       }
     }

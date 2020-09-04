@@ -12,7 +12,6 @@
     display: flex;
     flex-direction: row;
 
-    // HERE
     .slide {
       position: relative;
       width: 100%;
@@ -30,7 +29,7 @@
 }
 
 .slide_cont::after {
-  content: "www.pixabay.com";
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;

@@ -18,7 +18,6 @@ export class Header extends Component {
 
   onClickHandle(e) {
     const target = e.target;
-    console.log(target);
     this.setState({
       menuIconDisplayStyle: { display: "none" },
       menuOpenIconDisplayStyle: { display: "block" },
@@ -28,7 +27,6 @@ export class Header extends Component {
 
   onClickHandleSecond(e) {
     const target = e.target;
-    console.log(target);
     this.setState({
       menuIconDisplayStyle: { display: "block" },
       menuOpenIconDisplayStyle: { display: "none" },
@@ -55,7 +53,13 @@ export class Header extends Component {
                 <li className="header-link">About</li>
                 <li className="header-link">Contact</li>
                 <li className="header-link">Products</li>
-                <li className="header-link">
+                <li
+                  className={
+                    "header-link" +
+                    (this.props.cartIsOpen ? " header-link--active" : "")
+                  }
+                  onClick={this.props.onClickCartHandle}
+                >
                   <ShoppingCartIcon />
                 </li>
               </ul>

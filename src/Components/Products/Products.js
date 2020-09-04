@@ -3,17 +3,41 @@ import "./ProductsStyle.scss";
 import Product from "./Product/Product";
 import Filter from "./Filter/Filter";
 import data from "./Data";
+import Cart from "./Cart/Cart";
 
 export class Products extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      cartItems: [],
       products: data,
       size: "",
       sort: "",
     };
   }
+
+  removeFromCart = (product) => {
+    const cartItems = this.state.cartItems.slice();
+    this.setState({
+      cartItems: cartItems.filter((x) => x._id !== product._id),
+    });
+  };
+
+  addToCart = (product) => {
+    const cartItems = this.state.cartItems.slice();
+    let alreadyExist = false;
+    cartItems.forEach((item) => {
+      if (item._id === product._id) {
+        item.count++;
+        alreadyExist = true;
+      }
+    });
+    if (!alreadyExist) {
+      cartItems.push({ ...product, count: 1 });
+    }
+    this.setState({ cartItems });
+  };
 
   sortProducts = (event) => {
     console.log(event.target.value);
@@ -70,16 +94,20 @@ export class Products extends Component {
             {this.state.products.map((product, index) => {
               return (
                 <Product
+                  addToCart={this.addToCart}
                   key={index}
-                  src={product.src}
-                  title={product.title}
-                  size={product.size}
-                  price={product.price}
+                  product={product}
                 />
               );
             })}
           </div>
         </div>
+        <Cart
+          onClickCartHandle={this.props.onClickCartHandle}
+          cartIsOpen={this.props.cartIsOpen}
+          cartItems={this.state.cartItems}
+          removeFromCart={this.removeFromCart}
+        />
       </>
     );
   }
