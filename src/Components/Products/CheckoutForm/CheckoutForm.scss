@@ -1,0 +1,95 @@
+.checkoutForm {
+  position: fixed;
+  background: white;
+  min-width: 25vw;
+  height: 80vh;
+  top: 73px;
+  right: -100%;
+  border-radius: 15px 0px 0px 15px;
+  box-shadow: -2px 5px 8px -5px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 1s ease-in-out;
+  z-index: 10;
+
+  .checkoutForm-header {
+    margin-top: 15px;
+    padding: 15px;
+
+    .close {
+      font-size: large;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 6px;
+      border: none;
+      top: 10px;
+      left: 10px;
+      text-align: center;
+      box-shadow: 0px 5px 8px -5px rgba(0, 0, 0, 0.75);
+      cursor: pointer;
+      outline: none;
+    }
+    .close:focus {
+      box-shadow: none;
+    }
+  }
+
+  .checkoutForm_body {
+    position: relative;
+    padding: 15px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      padding: 15px;
+      width: 317px;
+
+      label {
+        width: 100%;
+        margin: 10px 0px;
+      }
+
+      input {
+        width: 100%;
+        height: 40px;
+        padding: 5px;
+      }
+    }
+
+    .checkoutFrom_info {
+      padding: 25px;
+      margin: 20px 0px;
+      button {
+        border: none;
+        outline: none;
+        padding: 5px;
+        background: lightgreen;
+        border-bottom: 1px solid grey;
+        border-radius: 8px;
+        box-shadow: 0px 5px 8px -5px rgba(0, 0, 0, 0.75);
+        cursor: pointer;
+        font-weight: 600;
+        color: gray;
+      }
+
+      button:focus {
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+.checkoutForm--active {
+  top: 73px;
+  right: 0vw;
+}

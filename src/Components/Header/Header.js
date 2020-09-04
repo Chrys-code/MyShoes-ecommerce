@@ -52,7 +52,6 @@ export class Header extends Component {
                 <li className="header-link header-link--active">Home</li>
                 <li className="header-link">About</li>
                 <li className="header-link">Contact</li>
-                <li className="header-link">Products</li>
                 <li
                   className={
                     "header-link" +

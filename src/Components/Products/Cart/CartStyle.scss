@@ -2,8 +2,7 @@
   position: fixed;
   background: white;
   min-width: 25vw;
-  min-height: 20vh;
-  max-height: 80vh;
+  height: 80vh;
   top: 73px;
   right: -100%;
   border-radius: 15px 0px 0px 15px;
@@ -17,26 +16,25 @@
   .cart-header {
     margin-top: 15px;
     padding: 15px;
-  }
 
-  .close {
-    font-size: large;
-    position: absolute;
-    background: lightgrey;
-    border-radius: 6px;
-    border: none;
-    width: 20px;
-    height: 25px;
-    top: 10px;
-    left: 20px;
-    text-align: center;
-    box-shadow: 0px 5px 8px -5px rgba(0, 0, 0, 0.75);
-    cursor: pointer;
-    outline: none;
-  }
-
-  .close:focus {
-    box-shadow: none;
+    .close {
+      font-size: large;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 6px;
+      border: none;
+      top: 10px;
+      left: 10px;
+      text-align: center;
+      box-shadow: 0px 5px 8px -5px rgba(0, 0, 0, 0.75);
+      cursor: pointer;
+      outline: none;
+    }
+    .close:focus {
+      box-shadow: none;
+    }
   }
 
   .cart_body {
@@ -116,8 +114,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    padding: 15px;
-    margin: 15px;
+    padding: 25px;
+    margin: 20px 0px;
 
     button {
       border: none;

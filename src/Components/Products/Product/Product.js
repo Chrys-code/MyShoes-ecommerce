@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import "./ProductStyle.scss";
-import { setInStorage } from "../../../utils/Storage";
 
 export class Product extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      product: null,
+    };
   }
 
   render() {
@@ -15,10 +17,15 @@ export class Product extends Component {
             <h4>{this.props.product.title}</h4>
             <div className="product_image_wrapper">
               <div className="product_image_container">
-                <img
-                  src={this.props.product.src}
-                  alt={this.props.product.title}
-                />
+                <a
+                  href={"#" + this.props.product._id}
+                  onClick={() => this.props.openModal(this.props.product)}
+                >
+                  <img
+                    src={this.props.product.src}
+                    alt={this.props.product.title}
+                  />
+                </a>
               </div>
             </div>
           </div>
