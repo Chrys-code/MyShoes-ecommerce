@@ -136,6 +136,7 @@ export class Products extends Component {
           </div>
           {product && (
             <Modal
+              ariaHideApp={false}
               isOpen={true}
               onRequestClose={this.closeModal}
               style={{
