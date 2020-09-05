@@ -4,6 +4,8 @@ import Header from "./Components/Header/Header";
 import Products from "./Components/Products/Products";
 import Hero from "./Components/Hero/Hero";
 import Footer from "./Components/Footer/Footer";
+import store from "./store";
+import { Provider } from "react-redux";
 
 class App extends React.Component {
   constructor(props) {
@@ -26,22 +28,24 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app">
-        <Header
-          cartIsOpen={this.state.cartIsOpen}
-          onClickCartHandle={this.onClickCartHandle}
-        />
-        <div className="app_body">
-          <Hero />
-          <Products
-            onClickCartHandle={this.onClickCartHandle}
-            onClickCheckoutFormHandle={this.onClickCheckoutFormHandle}
+      <Provider store={store}>
+        <div className="app">
+          <Header
             cartIsOpen={this.state.cartIsOpen}
-            checkoutFormIsOpen={this.state.checkoutFormIsOpen}
+            onClickCartHandle={this.onClickCartHandle}
           />
-          <Footer />
+          <div className="app_body">
+            <Hero />
+            <Products
+              onClickCartHandle={this.onClickCartHandle}
+              onClickCheckoutFormHandle={this.onClickCheckoutFormHandle}
+              cartIsOpen={this.state.cartIsOpen}
+              checkoutFormIsOpen={this.state.checkoutFormIsOpen}
+            />
+            <Footer />
+          </div>
         </div>
-      </div>
+      </Provider>
     );
   }
 }

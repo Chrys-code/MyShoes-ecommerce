@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import "./ProductsStyle.scss";
 import Product from "./Product/Product";
-import Filter from "./Filter/Filter";
 import data from "./Data";
+import Filter from "./Filter/Filter";
 import Cart from "./Cart/Cart";
 import CheckoutForm from "./CheckoutForm/CheckoutForm";
 import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
 import CloseIcon from "@material-ui/icons/Close";
+import { connect } from "react-redux";
+import { fetchProducts } from "../../actions/productActions";
 
-export class Products extends Component {
+class Products extends Component {
   constructor(props) {
     super(props);
 
@@ -19,10 +21,15 @@ export class Products extends Component {
         ? JSON.parse(localStorage.getItem("cartItems"))
         : [],
       products: data,
+
       product: null,
       size: "",
       sort: "",
     };
+  }
+
+  componentDidMount() {
+    this.props.fetchProducts();
   }
 
   openModal = (product) => {
@@ -90,11 +97,14 @@ export class Products extends Component {
   filterProducts = (event) => {
     console.log(event.target.value);
     if (event.target.value === "") {
-      this.setState({ size: event.target.value, products: data });
+      this.setState({
+        size: event.target.value,
+        products: this.props.products,
+      });
     } else {
       this.setState({
         size: event.target.value,
-        products: data.filter(
+        products: this.props.products.filter(
           (data) => data.size.indexOf(event.target.value) >= 0
         ),
       });
@@ -118,20 +128,24 @@ export class Products extends Component {
           />
           <div className="row">
             <Fade bottom big>
-              <ul>
-                {products.map((product) => {
-                  return (
-                    <li key={product._id}>
-                      <Product
-                        addToCart={this.addToCart}
-                        product={product}
-                        openModal={this.openModal}
-                        closeModal={this.closeModal}
-                      />
-                    </li>
-                  );
-                })}
-              </ul>
+              {!this.props.products ? (
+                <div>Loading...</div>
+              ) : (
+                <ul>
+                  {this.props.products.map((product) => {
+                    return (
+                      <li key={product._id}>
+                        <Product
+                          addToCart={this.addToCart}
+                          product={product}
+                          openModal={this.openModal}
+                          closeModal={this.closeModal}
+                        />
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
             </Fade>
           </div>
           {product && (
@@ -205,4 +219,6 @@ export class Products extends Component {
   }
 }
 
-export default Products;
+export default connect((state) => ({ products: state.products.items }), {
+  fetchProducts,
+})(Products);
