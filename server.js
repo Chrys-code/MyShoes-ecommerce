@@ -12,6 +12,7 @@ mongoose.connect("mongodb://localhost/e-commerce-website-db", {
   useUnifiedTopology: true,
 });
 
+//Products
 const Product = mongoose.model(
   "products",
   new mongoose.Schema({
@@ -38,6 +39,56 @@ app.post("/api/products", async (req, res) => {
 app.delete("/api/products/:id", async (req, res) => {
   const deletedProduct = await Product.findByIdAndDelete(req.params.id);
   res.send(deletedProduct);
+});
+
+//Order
+const Order = mongoose.model(
+  "order",
+  new mongoose.Schema(
+    {
+      _id: {
+        type: String,
+        default: shortid.generate,
+      },
+      email: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      address: {
+        type: String,
+      },
+      total: {
+        type: Number,
+      },
+      cartItems: [
+        {
+          _id: String,
+          title: String,
+          price: Number,
+          count: Number,
+        },
+      ],
+    },
+    {
+      timestamps: true,
+    }
+  )
+);
+
+app.post("/api/orders", async (req, res) => {
+  if (
+    !req.body.name ||
+    !req.body.email ||
+    !req.body.address ||
+    !req.body.total ||
+    !req.body.cartItems
+  ) {
+    return res.send({ message: "Data is required" });
+  }
+  const order = await Order(req.body).save();
+  res.send(order);
 });
 
 const port = process.env.PORT || 8080;

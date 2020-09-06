@@ -11,16 +11,13 @@ import CloseIcon from "@material-ui/icons/Close";
 import { connect } from "react-redux";
 import { fetchProducts } from "../../actions/productActions";
 import { addToCart } from "../../actions/cartActions";
-import { removeFromCart } from "../../actions/cartActions";
+import { createOrder, clearOrder } from "../../actions/orderActions";
 
 class Products extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      cartItems: localStorage.getItem("cartItems")
-        ? JSON.parse(localStorage.getItem("cartItems"))
-        : [],
       product: null,
     };
   }
@@ -39,33 +36,6 @@ class Products extends Component {
 
   createOrder = (order) => {
     alert("Need to save order for " + order.name);
-  };
-
-  removeFromCart = (product) => {
-    const cartItems = this.state.cartItems.slice();
-    this.setState({
-      cartItems: cartItems.filter((x) => x._id !== product._id),
-    });
-    localStorage.setItem(
-      "cartItems",
-      JSON.stringify(cartItems.filter((x) => x._id !== product._id))
-    );
-  };
-
-  addToCart = (product) => {
-    const cartItems = this.state.cartItems.slice();
-    let alreadyExist = false;
-    cartItems.forEach((item) => {
-      if (item._id === product._id) {
-        item.count++;
-        alreadyExist = true;
-      }
-    });
-    if (!alreadyExist) {
-      cartItems.push({ ...product, count: 1 });
-    }
-    this.setState({ cartItems });
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
 
   render() {
@@ -90,7 +60,6 @@ class Products extends Component {
                           product={product}
                           addToCart={this.addToCart}
                           openModal={this.openModal}
-                          closeModal={this.closeModal}
                         />
                       </li>
                     );
@@ -113,11 +82,12 @@ class Products extends Component {
                 },
               }}
             >
+              <button className="modal_close" onClick={this.closeModal}>
+                <CloseIcon />
+              </button>
+
               <Zoom>
                 <div className="modal">
-                  <button className="modal_close" onClick={this.closeModal}>
-                    <CloseIcon />
-                  </button>
                   <div className="modal_product_details">
                     <div className="modal_img_wrapper">
                       <div className="modal_img_container">
@@ -137,7 +107,7 @@ class Products extends Component {
                         <button
                           className="btn primary"
                           onClick={() => {
-                            this.addToCart(product);
+                            this.props.addToCart(product);
                             this.closeModal();
                           }}
                         >
@@ -155,15 +125,12 @@ class Products extends Component {
           onClickCartHandle={this.props.onClickCartHandle}
           onClickCheckoutFormHandle={this.props.onClickCheckoutFormHandle}
           cartIsOpen={this.props.cartIsOpen}
-          cartItems={this.state.cartItems}
-          removeFromCart={this.removeFromCart}
         />
         <CheckoutForm
-          onClickCartHandle={this.props.onClickCheckoutFormHandle}
+          closeUp={this.props.closeUp}
           onClickCheckoutFormHandle={this.props.onClickCheckoutFormHandle}
           checkoutFormOpen={this.props.checkoutFormIsOpen}
           checkoutFormIsOpen={this.props.checkoutFormIsOpen}
-          createOrder={this.createOrder}
         />
       </>
     );
@@ -172,12 +139,14 @@ class Products extends Component {
 
 export default connect(
   (state) => ({
+    order: state.order.order,
     products: state.products.filteredItems,
     cartItems: state.cart.cartItems,
   }),
   {
     fetchProducts,
     addToCart,
-    removeFromCart,
+    createOrder,
+    clearOrder,
   }
 )(Products);

@@ -4,8 +4,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CloseIcon from "@material-ui/icons/Close";
 import Fade from "react-reveal/Fade";
 import { connect } from "react-redux";
+import { removeFromCart } from "../../../actions/cartActions";
 
-export default class Cart extends Component {
+class Cart extends Component {
   constructor(props) {
     super(props);
 
@@ -88,3 +89,13 @@ export default class Cart extends Component {
     );
   }
 }
+
+export default connect(
+  (state) => ({
+    products: state.products.filteredItems,
+    cartItems: state.cart.cartItems,
+  }),
+  {
+    removeFromCart,
+  }
+)(Cart);

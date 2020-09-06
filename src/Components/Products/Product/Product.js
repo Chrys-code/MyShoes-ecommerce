@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./ProductStyle.scss";
+import { connect } from "react-redux";
+import { addToCart } from "../../../actions/cartActions";
 
-export class Product extends Component {
+class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,4 +50,11 @@ export class Product extends Component {
   }
 }
 
-export default Product;
+export default connect(
+  (state) => ({
+    cartItems: state.cart.cartItems,
+  }),
+  {
+    addToCart,
+  }
+)(Product);

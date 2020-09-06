@@ -17,12 +17,15 @@ class App extends React.Component {
     };
   }
 
+  closeUp = () => {
+    this.setState({ cartIsOpen: false, checkoutFormIsOpen: false });
+  };
+
   onClickCartHandle = (e) => {
     this.setState({ cartIsOpen: !this.state.cartIsOpen });
   };
 
   onClickCheckoutFormHandle = (e) => {
-    console.log("triggered");
     this.setState({ checkoutFormIsOpen: !this.state.checkoutFormIsOpen });
   };
 
@@ -37,6 +40,7 @@ class App extends React.Component {
           <div className="app_body">
             <Hero />
             <Products
+              closeUp={this.closeUp}
               onClickCartHandle={this.onClickCartHandle}
               onClickCheckoutFormHandle={this.onClickCheckoutFormHandle}
               cartIsOpen={this.state.cartIsOpen}
