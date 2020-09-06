@@ -3,8 +3,9 @@ import "./CartStyle.scss";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CloseIcon from "@material-ui/icons/Close";
 import Fade from "react-reveal/Fade";
+import { connect } from "react-redux";
 
-export class Cart extends Component {
+export default class Cart extends Component {
   constructor(props) {
     super(props);
 
@@ -43,25 +44,27 @@ export class Cart extends Component {
             <div className="cart_body">
               <Fade left cascade>
                 <ul className="cart_items">
-                  {cartItems.map((item) => (
-                    <li key={item._id} className="cart-item">
+                  {cartItems.map((product) => (
+                    <li key={product._id} className="cart-item">
                       <div className="cart_item_image_wapper">
                         <div className="cart_item_image_container">
-                          <img src={item.src} alt={item.title} />
+                          <img src={product.src} alt={product.title} />
                         </div>
                       </div>
                       <div className="cart_item_body">
-                        <p>{item.title}</p>
-                        <p>Size: {item.size.join(", ")} </p>
+                        <p>{product.title}</p>
+                        <p>Size: {product.size.join(", ")} </p>
 
                         <p>
-                          Price: <span>${item.price}</span>
+                          Price: <span>${product.price}</span>
                         </p>
                         <p>
-                          Quantity: <span>{item.count}</span>
+                          Quantity: <span>{product.count}</span>
                         </p>
                       </div>
-                      <button onClick={() => this.props.removeFromCart(item)}>
+                      <button
+                        onClick={() => this.props.removeFromCart(product)}
+                      >
                         <DeleteIcon style={{ fontSize: "small" }} />
                       </button>
                     </li>
@@ -85,5 +88,3 @@ export class Cart extends Component {
     );
   }
 }
-
-export default Cart;

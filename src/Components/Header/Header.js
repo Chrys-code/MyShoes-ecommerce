@@ -17,7 +17,6 @@ export class Header extends Component {
   }
 
   onClickHandle(e) {
-    const target = e.target;
     this.setState({
       menuIconDisplayStyle: { display: "none" },
       menuOpenIconDisplayStyle: { display: "block" },
@@ -26,7 +25,6 @@ export class Header extends Component {
   }
 
   onClickHandleSecond(e) {
-    const target = e.target;
     this.setState({
       menuIconDisplayStyle: { display: "block" },
       menuOpenIconDisplayStyle: { display: "none" },

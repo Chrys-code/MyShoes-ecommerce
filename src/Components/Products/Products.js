@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./ProductsStyle.scss";
 import Product from "./Product/Product";
-import data from "./Data";
 import Filter from "./Filter/Filter";
 import Cart from "./Cart/Cart";
 import CheckoutForm from "./CheckoutForm/CheckoutForm";
@@ -11,6 +10,8 @@ import Zoom from "react-reveal/Zoom";
 import CloseIcon from "@material-ui/icons/Close";
 import { connect } from "react-redux";
 import { fetchProducts } from "../../actions/productActions";
+import { addToCart } from "../../actions/cartActions";
+import { removeFromCart } from "../../actions/cartActions";
 
 class Products extends Component {
   constructor(props) {
@@ -20,11 +21,7 @@ class Products extends Component {
       cartItems: localStorage.getItem("cartItems")
         ? JSON.parse(localStorage.getItem("cartItems"))
         : [],
-      products: data,
-
       product: null,
-      size: "",
-      sort: "",
     };
   }
 
@@ -71,61 +68,15 @@ class Products extends Component {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
 
-  sortProducts = (event) => {
-    console.log(event.target.value);
-    const sort = event.target.value;
-    this.setState((state) => ({
-      sort: sort,
-      products: this.state.products
-        .slice()
-        .sort((a, b) =>
-          sort === "lowest"
-            ? a.price > b.price
-              ? 1
-              : -1
-            : sort === "highest"
-            ? a.price < b.price
-              ? 1
-              : -1
-            : a._id > b._id
-            ? 1
-            : -1
-        ),
-    }));
-  };
-
-  filterProducts = (event) => {
-    console.log(event.target.value);
-    if (event.target.value === "") {
-      this.setState({
-        size: event.target.value,
-        products: this.props.products,
-      });
-    } else {
-      this.setState({
-        size: event.target.value,
-        products: this.props.products.filter(
-          (data) => data.size.indexOf(event.target.value) >= 0
-        ),
-      });
-    }
-  };
-
   render() {
-    const { product, products, size, sort } = this.state;
+    const { product } = this.state;
     return (
       <>
         <div className="card_products container_static">
           <div className="products_title">
             <h1>Products</h1>
           </div>
-          <Filter
-            count={products.length}
-            size={size}
-            sort={sort}
-            filterProducts={this.filterProducts}
-            sortProducts={this.sortProducts}
-          />
+          <Filter />
           <div className="row">
             <Fade bottom big>
               {!this.props.products ? (
@@ -136,8 +87,8 @@ class Products extends Component {
                     return (
                       <li key={product._id}>
                         <Product
-                          addToCart={this.addToCart}
                           product={product}
+                          addToCart={this.addToCart}
                           openModal={this.openModal}
                           closeModal={this.closeModal}
                         />
@@ -219,6 +170,14 @@ class Products extends Component {
   }
 }
 
-export default connect((state) => ({ products: state.products.items }), {
-  fetchProducts,
-})(Products);
+export default connect(
+  (state) => ({
+    products: state.products.filteredItems,
+    cartItems: state.cart.cartItems,
+  }),
+  {
+    fetchProducts,
+    addToCart,
+    removeFromCart,
+  }
+)(Products);
