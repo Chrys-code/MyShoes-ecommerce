@@ -6,50 +6,48 @@ import Hero from "./Components/Hero/Hero";
 import Footer from "./Components/Footer/Footer";
 import store from "./store";
 import { Provider } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import Fade from "react-reveal/Fade";
+import About from "./About";
+import Admin from "./Admin";
+import Cart from "./Components/Cart/Cart";
+import CheckoutForm from "./Components/CheckoutForm/CheckoutForm";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      cartIsOpen: false,
-      checkoutFormIsOpen: false,
-    };
-  }
-
-  closeUp = () => {
-    this.setState({ cartIsOpen: false, checkoutFormIsOpen: false });
-  };
-
-  onClickCartHandle = (e) => {
-    this.setState({ cartIsOpen: !this.state.cartIsOpen });
-  };
-
-  onClickCheckoutFormHandle = (e) => {
-    this.setState({ checkoutFormIsOpen: !this.state.checkoutFormIsOpen });
-  };
-
   render() {
     return (
       <Provider store={store}>
         <div className="app">
-          <Header
-            cartIsOpen={this.state.cartIsOpen}
-            onClickCartHandle={this.onClickCartHandle}
-          />
+          <Header />
+          <Cart />
+          <CheckoutForm />
           <div className="app_body">
-            <Hero />
-            <Products
-              closeUp={this.closeUp}
-              onClickCartHandle={this.onClickCartHandle}
-              onClickCheckoutFormHandle={this.onClickCheckoutFormHandle}
-              cartIsOpen={this.state.cartIsOpen}
-              checkoutFormIsOpen={this.state.checkoutFormIsOpen}
+            <Route
+              render={({ location }) => (
+                <Switch location={location} key={location.key}>
+                  <Route path="/" exact component={Home} />
+
+                  <Route path="/About" component={About} />
+                  <Route path="/Admin" component={Admin} />
+                </Switch>
+              )}
             />
-            <Footer />
           </div>
+          <Footer />
         </div>
       </Provider>
+    );
+  }
+}
+class Home extends React.Component {
+  render() {
+    return (
+      <>
+        <Fade>
+          <Hero />
+          <Products />
+        </Fade>
+      </>
     );
   }
 }

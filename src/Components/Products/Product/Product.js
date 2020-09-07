@@ -4,13 +4,6 @@ import { connect } from "react-redux";
 import { addToCart } from "../../../actions/cartActions";
 
 class Product extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      product: null,
-    };
-  }
-
   render() {
     return (
       <div className="col-xxlg-3 col-xlg-3 col-lg-4 col-md-6 col-sm-6 col-xsm-12">

@@ -4,31 +4,22 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CloseIcon from "@material-ui/icons/Close";
 import Fade from "react-reveal/Fade";
 import { connect } from "react-redux";
-import { removeFromCart } from "../../../actions/cartActions";
+import {
+  removeFromCart,
+  openCart,
+  openCheckoutForm,
+} from "../../actions/cartActions";
 
 class Cart extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      cartIsOpen: this.props.cartIsOpen,
-    };
-  }
-
   render() {
-    const { cartItems } = this.props;
+    const { cartItems, isOpen } = this.props;
     return (
-      <div
-        className={
-          "shoppingCart" +
-          (this.props.cartIsOpen ? " shoppingCart--active" : "")
-        }
-      >
+      <div className={"shoppingCart" + (isOpen ? " shoppingCart--active" : "")}>
         {cartItems.length === 0 ? (
           <>
             <div className="cart cart-header">
               Cart is empty
-              <button onClick={this.props.onClickCartHandle} className="close">
+              <button onClick={this.props.openCart} className="close">
                 <CloseIcon />
               </button>
             </div>
@@ -37,7 +28,7 @@ class Cart extends Component {
           <>
             <div className="cart cart-header">
               You have {cartItems.length} items
-              <button onClick={this.props.onClickCartHandle} className="close">
+              <button onClick={this.props.openCart} className="close">
                 <CloseIcon />
               </button>
             </div>
@@ -79,7 +70,7 @@ class Cart extends Component {
                 {cartItems.reduce((a, c) => a + c.price * c.count, 0)}
               </p>
 
-              <button onClick={this.props.onClickCheckoutFormHandle}>
+              <button onClick={this.props.openCheckoutForm}>
                 To checkout!
               </button>
             </div>
@@ -92,10 +83,13 @@ class Cart extends Component {
 
 export default connect(
   (state) => ({
+    isOpen: state.cartState.isOpen,
     products: state.products.filteredItems,
     cartItems: state.cart.cartItems,
   }),
   {
     removeFromCart,
+    openCart,
+    openCheckoutForm,
   }
 )(Cart);

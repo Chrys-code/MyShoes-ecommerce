@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import "./ProductsStyle.scss";
 import Product from "./Product/Product";
 import Filter from "./Filter/Filter";
-import Cart from "./Cart/Cart";
-import CheckoutForm from "./CheckoutForm/CheckoutForm";
 import Fade from "react-reveal/Fade";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
@@ -56,11 +54,7 @@ class Products extends Component {
                   {this.props.products.map((product) => {
                     return (
                       <li key={product._id}>
-                        <Product
-                          product={product}
-                          addToCart={this.addToCart}
-                          openModal={this.openModal}
-                        />
+                        <Product product={product} openModal={this.openModal} />
                       </li>
                     );
                   })}
@@ -121,17 +115,6 @@ class Products extends Component {
             </Modal>
           )}
         </div>
-        <Cart
-          onClickCartHandle={this.props.onClickCartHandle}
-          onClickCheckoutFormHandle={this.props.onClickCheckoutFormHandle}
-          cartIsOpen={this.props.cartIsOpen}
-        />
-        <CheckoutForm
-          closeUp={this.props.closeUp}
-          onClickCheckoutFormHandle={this.props.onClickCheckoutFormHandle}
-          checkoutFormOpen={this.props.checkoutFormIsOpen}
-          checkoutFormIsOpen={this.props.checkoutFormIsOpen}
-        />
       </>
     );
   }

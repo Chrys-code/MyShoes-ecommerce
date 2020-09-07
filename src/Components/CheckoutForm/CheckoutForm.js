@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./CheckoutForm.scss";
 import CloseIcon from "@material-ui/icons/Close";
-import { createOrder, clearOrder } from "../../../actions/orderActions";
+import { createOrder, clearOrder } from "../../actions/orderActions";
+import { closeUp, openCheckoutForm } from "../../actions/cartActions";
 import { connect } from "react-redux";
 import Modal from "react-modal";
 import Zoom from "react-reveal/Zoom";
@@ -47,15 +48,12 @@ export class CheckoutForm extends Component {
       <div
         className={
           "checkoutForm" +
-          (this.props.checkoutFormOpen ? " checkoutForm--active" : "")
+          (this.props.isFormOpen ? " checkoutForm--active" : "")
         }
       >
         <div className="checkoutForm-header">
           Checkout
-          <button
-            onClick={this.props.onClickCheckoutFormHandle}
-            className="close"
-          >
+          <button onClick={this.props.openCheckoutForm} className="close">
             <CloseIcon />
           </button>
         </div>
@@ -163,12 +161,15 @@ export class CheckoutForm extends Component {
 
 export default connect(
   (state) => ({
+    isFormOpen: state.cartState.isFormOpen,
     order: state.order.order,
     products: state.products.filteredItems,
     cartItems: state.cart.cartItems,
   }),
   {
+    openCheckoutForm,
     createOrder,
     clearOrder,
+    closeUp,
   }
 )(CheckoutForm);

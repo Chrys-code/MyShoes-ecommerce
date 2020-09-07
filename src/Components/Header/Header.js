@@ -3,6 +3,9 @@ import "./HeaderStyle.scss";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import MenuIcon from "@material-ui/icons/Menu";
 import MenuOpenIcon from "@material-ui/icons/MenuOpen";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { openCart } from "../../actions/cartActions";
 
 export class Header extends Component {
   constructor(props) {
@@ -13,6 +16,10 @@ export class Header extends Component {
       menuOpenIconDisplayStyle: { display: "none" },
       headerHeightStyle: {},
       isOpen: false,
+      about: "",
+      contact: "",
+      home: "header-link--active",
+      admin: "",
     };
   }
 
@@ -47,15 +54,57 @@ export class Header extends Component {
             </div>
             <div className="header_right">
               <ul className="header_links">
-                <li className="header-link header-link--active">Home</li>
-                <li className="header-link">About</li>
-                <li className="header-link">Contact</li>
+                <Link
+                  to="/"
+                  onClick={() =>
+                    this.setState({
+                      home: "header-link--active",
+                      about: "",
+                      contact: "",
+                      admin: "",
+                      isOpen: false,
+                    })
+                  }
+                >
+                  <li className={"header-link " + this.state.home}>Home</li>
+                </Link>
+
+                <Link
+                  to="/About"
+                  onClick={() =>
+                    this.setState({
+                      home: "",
+                      about: "header-link--active",
+                      contact: "",
+                      admin: "",
+
+                      isOpen: false,
+                    })
+                  }
+                >
+                  <li className={"header-link " + this.state.about}>About</li>
+                </Link>
+                <Link
+                  to="/Admin"
+                  onClick={() =>
+                    this.setState({
+                      home: "",
+                      about: "",
+                      contact: "",
+                      admin: "header-link--active",
+                      isOpen: false,
+                    })
+                  }
+                >
+                  <li className={"header-link " + this.state.admin}>Admin</li>
+                </Link>
+
                 <li
                   className={
                     "header-link" +
                     (this.props.cartIsOpen ? " header-link--active" : "")
                   }
-                  onClick={this.props.onClickCartHandle}
+                  onClick={this.props.openCart}
                 >
                   <ShoppingCartIcon />
                 </li>
@@ -84,4 +133,11 @@ export class Header extends Component {
   }
 }
 
-export default Header;
+export default connect(
+  (state) => ({
+    isOpen: state.cart.isOpen,
+  }),
+  {
+    openCart,
+  }
+)(Header);
