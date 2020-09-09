@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const shortid = require("shortid");
+const MongoClient = require("mongodb").MongoClient;
 require("dotenv/config");
 
 const app = express();
@@ -9,6 +10,15 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 
 //Connection
+const client = new MongoClient(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+});
+
+client.connect();
+
+/*
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/e-commerce-website",
   {
@@ -17,7 +27,7 @@ mongoose.connect(
     useUnifiedTopology: true,
   }
 );
-
+*/
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("../client/build"));
 }
