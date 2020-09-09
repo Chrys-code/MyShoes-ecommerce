@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const shortid = require("shortid");
+const { on } = require("nodemon");
 require("dotenv/config");
 
 const app = express();
@@ -111,6 +112,12 @@ app.delete("/api/orders/:id", async (req, res) => {
   res.send(deletedOrder);
 });
 
+mongoose.connection.on("connected", () => {
+  console.log("CONNECTED");
+});
+
 //Listener
 const port = process.env.PORT || 8080;
-app.listen(port);
+app.listen(port, () => {
+  console.log(`server running at Port: ${port} `);
+});
