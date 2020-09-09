@@ -7,4 +7,4 @@ Tools: REDUX & SASS
 
 For different reasons a different version will be hosted on Firebase.
 
-Hosted at: -link-later
+Hosted at: https://myshoes-ecommerce.herokuapp.com/#/
