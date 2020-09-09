@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const shortid = require("shortid");
-const { on } = require("nodemon");
 require("dotenv/config");
 
 const app = express();
