@@ -2,15 +2,25 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const shortid = require("shortid");
+require("dotenv/config");
 
 const app = express();
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
 
-mongoose.connect("mongodb://localhost/e-commerce-website-db", {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true,
-});
+//Connection
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/e-commerce-website",
+  {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  }
+);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 
 //Products
 const Product = mongoose.model(
@@ -101,5 +111,6 @@ app.delete("/api/orders/:id", async (req, res) => {
   res.send(deletedOrder);
 });
 
+//Listener
 const port = process.env.PORT || 8080;
-app.listen(port, () => console.log(`server run at http://localhost:${port}`));
+app.listen(port);

@@ -21,6 +21,7 @@ class Products extends Component {
   }
 
   componentDidMount() {
+    //MongoDB
     this.props.fetchProducts();
   }
 
