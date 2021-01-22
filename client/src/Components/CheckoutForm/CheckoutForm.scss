@@ -141,3 +141,11 @@
     }
   }
 }
+
+@media screen and (max-width: 576px) {
+  .checkoutForm {
+    width: 100vw;
+    min-height: 10vh;
+  }
+}
+

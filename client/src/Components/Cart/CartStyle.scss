@@ -140,3 +140,10 @@
   top: 73px;
   right: 0vw;
 }
+
+@media screen and (max-width: 576px) {
+  .shoppingCart {
+    width: 100vw;
+    min-height: 10vh;
+  }
+}

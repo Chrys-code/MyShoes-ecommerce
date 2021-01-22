@@ -1,12 +1,12 @@
 .header {
-  position: sticky;
-  top: 0px;
+  position: fixed;
+  width: 100%;
   background-color: white;
   border-bottom: 1px solid grey;
   border-radius: 0px 0px 15px 15px;
   box-shadow: 0px 5px 8px -5px rgba(0, 0, 0, 0.75);
   padding: 15px 20px;
-  z-index: 10;
+  z-index: 15;
   overflow: hidden;
   transition: 0.4s ease-in-out;
 
@@ -22,7 +22,7 @@
     .header_left {
       padding: 0px 20px;
       margin-left: 20px;
-      flex: 0.3;
+      flex: 0.5;
 
       h2 {
         color: rgb(255, 50, 130);
@@ -31,7 +31,7 @@
 
     .header_right {
       padding: 0px 20px;
-      flex: 0.3;
+      flex: 0.4;
 
       .header_links {
         padding: 0;
@@ -59,17 +59,38 @@
           color: rgb(255, 50, 130);
         }
 
-        .header-link--active {
-          .MuiSvgIcon-root {
-            color: rgb(255, 50, 130);
-          }
-        }
+      }
+    }
+
+    .header-link {
+      flex: 0.1;
+      color: grey;
+      font-weight: 600;
+      transform: translateY(15%);
+      cursor: pointer;
+    }
+
+    .header-link--active {
+      color: rgb(255, 50, 130);
+    }
+
+    .header-link:nth-of-type(1) {
+      transform: translateY(+10%);
+    }
+
+    .header-link:hover {
+      color: rgb(255, 50, 130);
+    }
+
+    .header-link--active {
+      .MuiSvgIcon-root {
+        color: rgb(255, 50, 130);
       }
     }
 
     .burger_cont {
       cursor: pointer;
-
+      transform: translateY(15%);
       display: none;
       padding: 0px 20px;
       flex: 0.3;
@@ -82,7 +103,7 @@
 }
 
 .header--active {
-  height: 300px;
+  height: 250px;
   transition: 0.4s ease-in-out;
 }
 

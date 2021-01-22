@@ -99,17 +99,19 @@ export class Header extends Component {
                   <li className={"header-link " + this.state.admin}>Admin</li>
                 </Link>
 
-                <li
-                  className={
-                    "header-link" +
-                    (this.props.cartIsOpen ? " header-link--active" : "")
-                  }
-                  onClick={this.props.openCart}
-                >
-                  <ShoppingCartIcon />
-                </li>
               </ul>
             </div>
+
+            <div
+              className={
+                "header-link" +
+                (this.props.cartIsOpen ? " header-link--active" : "")
+              }
+              onClick={this.props.openCart}
+            >
+              <ShoppingCartIcon />
+            </div>
+
             <div className="burger_cont">
               <div
                 className="menu"

@@ -18,7 +18,7 @@ const client = new MongoClient(process.env.MONGODB_URI, {
 
 client.connect();
 
-/*
+//Dev connect
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/e-commerce-website",
   {
@@ -27,7 +27,8 @@ mongoose.connect(
     useUnifiedTopology: true,
   }
 );
-*/
+
+//Heroku connect
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("../client/build"));
 }
