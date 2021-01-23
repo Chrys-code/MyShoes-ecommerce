@@ -41,26 +41,26 @@ class Products extends Component {
     const { product } = this.state;
     return (
       <>
-        <div className="card_products container_static">
+        <div className="card_products">
           <div className="products_title">
             <h1>Products</h1>
           </div>
           <Filter />
-          <div className="row">
+          <div className="display">
             <Fade bottom big>
               {!this.props.products ? (
                 <div>Loading...</div>
               ) : (
-                <ul>
-                  {this.props.products.map((product) => {
-                    return (
-                      <li key={product._id}>
-                        <Product product={product} openModal={this.openModal} />
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
+                  <ul>
+                    {this.props.products.map((product) => {
+                      return (
+                        <li key={product._id}>
+                          <Product product={product} openModal={this.openModal} />
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
             </Fade>
           </div>
           {product && (

@@ -6,7 +6,7 @@ import { addToCart } from "../../../actions/cartActions";
 class Product extends Component {
   render() {
     return (
-      <div className="col-xxlg-3 col-xlg-3 col-lg-4 col-md-6 col-sm-6 col-xsm-12">
+      <div className="">
         <div className="product">
           <div className="product_top">
             <h4>{this.props.product.title}</h4>
